@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Kitchen Template</title>
+  <meta name="description" content="Responsive cloud kitchen website template with direct WhatsApp ordering, menu categories, trust sections, and analytics hooks." />
+
+  <!-- Google Analytics placeholder -->
+  <!-- Replace G-JKF8G84JSS with your tracking ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKF8G84JSS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JKF8G84JSS');
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cloud Kitchen Template" />
+  <meta property="og:description" content="A premium, responsive cloud kitchen website template with direct WhatsApp ordering." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg-soft:#111831;
+      --card:#121a35;
+      --card-2:#162043;
+      --text:#f5f7ff;
+      --muted:#b8c0e0;
+      --line:rgba(255,255,255,.08);
+      --accent:#ffb703;
+      --accent-2:#ff6b6b;
+      --success:#25d366;
+      --shadow:0 18px 50px rgba(0,0,0,.25);
+      --radius:22px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,183,3,.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,107,107,.12), transparent 26%),
+        linear-gradient(180deg, #070b16 0%, #0b1020 45%, #09101d 100%);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
+    .section{padding:84px 0}
+    .eyebrow{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 14px; border:1px solid var(--line); border-radius:999px;
+      color:var(--accent); background:rgba(255,183,3,.07);
+      font-size:.9rem; letter-spacing:.02em;
+    }
+	.add-note{visibility:hidden}
+    .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+    h1,h2,h3,p{margin:0}
+    h1{
+      font-size:clamp(2.4rem, 5vw, 4.9rem);
+      line-height:1.03;
+      letter-spacing:-0.03em;
+      margin-top:18px;
+    }
+    h2{
+      font-size:clamp(1.8rem, 3vw, 2.8rem);
+      line-height:1.12;
+      letter-spacing:-0.02em;
+      margin-bottom:14px;
+    }
+    .sub{
+      color:var(--muted);
+      max-width:720px;
+      font-size:1.05rem;
+    }
+
+    /* Header */
+    .topbar{
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter: blur(16px);
+      background:rgba(7,11,22,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; min-height:76px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:800;
+      letter-spacing:.01em;
+    }
+    .brand-badge{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      display:grid;place-items:center;color:#111;font-weight:900;
+      box-shadow:0 10px 30px rgba(255,183,3,.28);
+    }
+    .nav-links{
+      display:flex; align-items:center; gap:18px; color:var(--muted); font-weight:600;
+    }
+    .nav-links a:hover{color:var(--text)}
+    .nav-cta{display:flex; align-items:center; gap:10px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px; padding:13px 18px; border-radius:14px;
+      border:1px solid transparent; font-weight:800;
+      transition:.2s ease; cursor:pointer; white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      background:linear-gradient(135deg, var(--accent), #ffd166);
+      color:#1b1300;
+      box-shadow:0 12px 30px rgba(255,183,3,.20);
+    }
+    .btn-secondary{
+      background:transparent; border-color:var(--line); color:var(--text);
+    }
+    .menu-toggle{
+      display:none;
+      width:46px;height:46px;border-radius:14px;
+      border:1px solid var(--line); background:rgba(255,255,255,.02);
+      color:var(--text);
+    }
+
+    /* Hero */
+    .hero{
+      padding:52px 0 28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-grid{
+      display:grid; grid-template-columns: 1.15fr .85fr; gap:30px;
+      align-items:stretch;
+    }
+    .hero-copy{
+      padding:36px 0 18px;
+    }
+    .hero-actions{
+      display:flex; flex-wrap:wrap; gap:14px; margin-top:28px;
+    }
+    .hero-metrics{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:28px;
+    }
+    .metric{
+      padding:18px; border:1px solid var(--line); border-radius:18px;
+      background:rgba(255,255,255,.02);
+    }
+    .metric strong{display:block; font-size:1.2rem}
+    .metric span{color:var(--muted); font-size:.92rem}
+
+    .hero-card{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') center/cover;
+      min-height:620px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+    }
+    .hero-overlay{
+      width:100%;
+      padding:22px;
+      background:linear-gradient(180deg, transparent 0%, rgba(5,7,12,.22) 12%, rgba(5,7,12,.85) 100%);
+    }
+    .card-badges{
+      display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px;
+    }
+    .badge{
+      padding:8px 12px;border-radius:999px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff; font-size:.88rem;
+      backdrop-filter: blur(6px);
+    }
+    .menu-preview{
+      display:grid; gap:12px;
+      margin-top:18px;
+    }
+    .preview-item{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:14px 16px; border-radius:18px;
+      background:rgba(11,16,32,.82);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .preview-item small{display:block;color:var(--muted)}
+    .preview-item .price{color:var(--accent); font-weight:900}
+
+    /* Cards */
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+    .card h3{font-size:1.05rem;margin-bottom:10px}
+    .card p, .muted{color:var(--muted)}
+    .icon{
+      width:50px;height:50px;border-radius:16px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(255,183,3,.18), rgba(255,107,107,.14));
+      border:1px solid rgba(255,255,255,.08);
+      margin-bottom:16px;
+      font-size:1.2rem;
+    }
+
+    /* Menu */
+    .menu-filters{
+      display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 26px;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      padding:10px 14px; border-radius:999px;
+      cursor:pointer; font-weight:700;
+    }
+    .pill.active{
+      background:linear-gradient(135deg, var(--accent), #ffd166);
+      color:#1b1300; border-color:transparent;
+    }
+    .menu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .menu-item{
+      padding:18px; border-radius:22px; background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .dish-top{display:flex; justify-content:space-between; gap:12px; align-items:flex-start}
+    .dish-top h3{margin:0}
+    .dish-meta{color:var(--muted); font-size:.92rem}
+    .dish-price{font-weight:900; color:var(--accent); font-size:1.1rem}
+    .dish-image{
+      aspect-ratio: 16/10;
+      border-radius:18px;
+      background:#10162d center/cover no-repeat;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .menu-actions{display:flex; gap:10px; flex-wrap:wrap}
+
+    .small-btn{
+      padding:11px 14px; border-radius:12px;
+      font-weight:800; font-size:.94rem;
+      border:1px solid var(--line); color:var(--text);
+      background:rgba(255,255,255,.03);
+    }
+    .small-btn.whatsapp{
+      background:linear-gradient(135deg, rgba(37,211,102,.96), rgba(37,211,102,.78));
+      color:#07210f; border-color:transparent;
+    }
+
+    /* Story / About */
+    .timeline{
+      display:grid; gap:14px;
+    }
+    .step{
+      display:flex; gap:14px; padding:18px; border-radius:18px;
+      border:1px solid var(--line); background:rgba(255,255,255,.03);
+    }
+    .step .num{
+      width:36px;height:36px;border-radius:12px;
+      background:linear-gradient(135deg, var(--accent), #ffd166);
+      color:#1b1300; display:grid; place-items:center; font-weight:900;
+      flex:0 0 auto;
+    }
+
+    /* Testimonials */
+    .review{
+      display:flex; flex-direction:column; gap:12px;
+      min-height:180px;
+    }
+    .stars{color:var(--accent); letter-spacing:1px}
+    .reviewer{
+      display:flex; align-items:center; gap:12px; margin-top:auto;
+    }
+    .avatar{
+      width:44px;height:44px;border-radius:50%;
+      background:linear-gradient(135deg, var(--accent-2), var(--accent));
+    }
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px 18px;
+      background:rgba(255,255,255,.03);
+    }
+    details + details{margin-top:12px}
+    summary{
+      cursor:pointer; font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+
+    /* CTA */
+    .cta{
+      background:
+        linear-gradient(135deg, rgba(255,183,3,.16), rgba(255,107,107,.12)),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:32px;
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+    .cta-inner{
+      display:flex; align-items:center; justify-content:space-between; gap:18px;
+    }
+
+    .footer{
+      padding:26px 0 40px;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.06);
+      margin-top:48px;
+    }
+    .footer-grid{
+      display:grid; grid-template-columns:1.4fr .8fr .8fr; gap:20px;
+    }
+
+    .sticky-whatsapp{
+      position:fixed;
+      right:18px; bottom:18px;
+      z-index:1200;
+      display:flex; align-items:center; gap:10px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--success), #72f0a3);
+      color:#053816;
+      padding:14px 18px;
+      font-weight:900;
+      box-shadow:0 16px 38px rgba(37,211,102,.25);
+      border:0;
+    }
+    .floating-analytics{
+      position:fixed; left:18px; bottom:18px; z-index:1200;
+      background:rgba(10,14,28,.88);
+      border:1px solid var(--line);
+      color:var(--text);
+      padding:12px 14px;
+      border-radius:16px;
+      max-width:290px;
+      box-shadow:var(--shadow);
+    }
+    .floating-analytics strong{display:block; margin-bottom:4px}
+    .floating-analytics span{color:var(--muted); font-size:.9rem}
+
+    .mobile-nav{
+      display:none;
+      padding:0 20px 16px;
+    }
+    .mobile-nav a{
+      display:block;
+      padding:12px 0;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-card{min-height:500px}
+      .grid-3, .menu-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 768px){
+      .nav-links, .nav-cta .btn-secondary{display:none}
+      .menu-toggle{display:inline-grid;place-items:center}
+      .mobile-nav.open{display:block}
+      .hero{padding-top:34px}
+      .hero-metrics, .grid-3, .grid-2, .menu-grid, .footer-grid{grid-template-columns:1fr}
+      .cta-inner{flex-direction:column; align-items:flex-start}
+      .section{padding:64px 0}
+      .floating-analytics{max-width:240px}
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top">
+          <div class="brand-badge">K</div>
+          <div>
+            <div>Kitchen Name</div>
+            <div class="muted" style="font-size:.86rem">Cloud Kitchen • Direct Orders</div>
+          </div>
+        </a>
+
+        <nav class="nav-links">
+          <a href="#menu">Menu</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="nav-cta">
+          <a class="btn btn-secondary" href="tel:+918454921895">Call Now</a>
+          <a class="btn btn-primary" href="#order">Order on WhatsApp</a>
+          <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#menu">Menu</a>
+      <a href="#why-direct">Why Direct</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow"><span class="dot"></span> Fresh food. Fast order. Direct savings.</span>
+            <h1>Built for cloud kitchens that want more direct orders.</h1>
+            <p class="sub" style="margin-top:18px">
+              A premium, mobile-first website that helps customers discover your kitchen, browse the menu, and order instantly on WhatsApp — while you keep control of the relationship and your margins.
+            </p>
+
+            <div class="hero-actions" id="order">
+              <a class="btn btn-primary" id="heroWhatsAppBtn" href="https://wa.me/918454921895?text=Hi%20I%20want%20to%20order%20from%20Kitchen%20Name" target="_blank" rel="noopener">
+                Order on WhatsApp
+              </a>
+              <a class="btn btn-secondary" href="#menu">View Menu</a>
+            </div>
+
+            <div class="hero-metrics">
+              <div class="metric">
+                <strong>1-click</strong>
+                <span>WhatsApp ordering</span>
+              </div>
+              <div class="metric">
+                <strong>Analytics</strong>
+                <span>Track clicks & demand</span>
+              </div>
+              <div class="metric">
+                <strong>Mobile-first</strong>
+                <span>Built for discovery</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card" aria-label="Restaurant hero image and highlights">
+            <div class="hero-overlay">
+              <div class="card-badges">
+                <span class="badge">Fast Delivery</span>
+                <span class="badge">Custom Orders</span>
+                <span class="badge">Hygienic Prep</span>
+              </div>
+
+              <div class="menu-preview">
+                <div class="preview-item">
+                  <div>
+                    <strong>Chicken Fried Rice</strong>
+                    <small>Best seller • spicy option available</small>
+                  </div>
+                  <div class="price">₹179</div>
+                </div>
+                <div class="preview-item">
+                  <div>
+                    <strong>Veg Hakka Noodles</strong>
+                    <small>Popular • family size</small>
+                  </div>
+                  <div class="price">₹149</div>
+                </div>
+                <div class="preview-item">
+                  <div>
+                    <strong>Paneer Manchurian</strong>
+                    <small>New • chef special</small>
+                  </div>
+                  <div class="price">₹199</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section class="section" id="menu">
+      <div class="container">
+        <span class="eyebrow"><span class="dot"></span> Menu</span>
+        <h2 style="margin-top:16px">A clean menu system that works on mobile.</h2>
+        <p class="sub">Use categories to guide behavior. Keep each item card short, visible, and order-friendly.</p>
+
+        <div class="menu-filters" aria-label="Menu categories">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="starters">Starters</button>
+          <button class="pill" data-filter="mains">Main Course</button>
+          <button class="pill" data-filter="rice">Rice & Noodles</button>
+          <button class="pill" data-filter="drinks">Drinks</button>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-item" data-category="rice">
+            <div class="dish-image" style="background-image:url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="dish-top">
+              <div>
+                <h3>Chicken Fried Rice</h3>
+                <div class="dish-meta">Classic • Spicy / Non-spicy</div>
+              </div>
+              <div class="dish-price">₹179</div>
+            </div>
+            <p class="muted">A bestseller with strong margin potential and high repeat demand.</p>
+            <div class="menu-actions">
+              <a class="small-btn whatsapp track-click" data-item="Chicken Fried Rice"
+                 href="https://wa.me/918454921895?text=Hi%20I%20want%20Chicken%20Fried%20Rice" target="_blank" rel="noopener">Order on WhatsApp</a>
+              <button class="small-btn add-note" data-item="Chicken Fried Rice">Add Note</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-category="mains">
+            <div class="dish-image" style="background-image:url('https://images.unsplash.com/photo-1604908554162-45f18a8ae3c9?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="dish-top">
+              <div>
+                <h3>Paneer Butter Masala</h3>
+                <div class="dish-meta">Rich • Family favorite</div>
+              </div>
+              <div class="dish-price">₹229</div>
+            </div>
+            <p class="muted">Popular with family meals; easy to bundle with naan and rice.</p>
+            <div class="menu-actions">
+              <a class="small-btn whatsapp track-click" data-item="Paneer Butter Masala"
+                 href="https://wa.me/918454921895?text=Hi%20I%20want%20Paneer%20Butter%20Masala" target="_blank" rel="noopener">Order on WhatsApp</a>
+              <button class="small-btn add-note" data-item="Paneer Butter Masala">Add Note</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-category="starters">
+            <div class="dish-image" style="background-image:url('https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="dish-top">
+              <div>
+                <h3>Chilli Chicken</h3>
+                <div class="dish-meta">Crispy • Popular starter</div>
+              </div>
+              <div class="dish-price">₹249</div>
+            </div>
+            <p class="muted">Strong add-on item for higher average order value.</p>
+            <div class="menu-actions">
+              <a class="small-btn whatsapp track-click" data-item="Chilli Chicken"
+                 href="https://wa.me/918454921895?text=Hi%20I%20want%20Chilli%20Chicken" target="_blank" rel="noopener">Order on WhatsApp</a>
+              <button class="small-btn add-note" data-item="Chilli Chicken">Add Note</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-category="rice">
+            <div class="dish-image" style="background-image:url('https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="dish-top">
+              <div>
+                <h3>Veg Hakka Noodles</h3>
+                <div class="dish-meta">Fresh veggies • quick order</div>
+              </div>
+              <div class="dish-price">₹149</div>
+            </div>
+            <p class="muted">Low-friction item for quick lunch and dinner conversions.</p>
+            <div class="menu-actions">
+              <a class="small-btn whatsapp track-click" data-item="Veg Hakka Noodles"
+                 href="https://wa.me/918454921895?text=Hi%20I%20want%20Veg%20Hakka%20Noodles" target="_blank" rel="noopener">Order on WhatsApp</a>
+              <button class="small-btn add-note" data-item="Veg Hakka Noodles">Add Note</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-category="mains">
+            <div class="dish-image" style="background-image:url('https://images.unsplash.com/photo-1588166524941-3bf61a9c41d0?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="dish-top">
+              <div>
+                <h3>Egg Curry Meal</h3>
+                <div class="dish-meta">Home-style • comfort meal</div>
+              </div>
+              <div class="dish-price">₹169</div>
+            </div>
+            <p class="muted">A value meal that can help drive weekday order volume.</p>
+            <div class="menu-actions">
+              <a class="small-btn whatsapp track-click" data-item="Egg Curry Meal"
+                 href="https://wa.me/918454921895?text=Hi%20I%20want%20Egg%20Curry%20Meal" target="_blank" rel="noopener">Order on WhatsApp</a>
+              <button class="small-btn add-note" data-item="Egg Curry Meal">Add Note</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-category="drinks">
+            <div class="dish-image" style="background-image:url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80')"></div>
+            <div class="dish-top">
+              <div>
+                <h3>Fresh Lime Soda</h3>
+                <div class="dish-meta">Refreshing • add-on</div>
+              </div>
+              <div class="dish-price">₹59</div>
+            </div>
+            <p class="muted">Perfect add-on item to increase average order value.</p>
+            <div class="menu-actions">
+              <a class="small-btn whatsapp track-click" data-item="Fresh Lime Soda"
+                 href="https://wa.me/918454921895?text=Hi%20I%20want%20Fresh%20Lime%20Soda" target="_blank" rel="noopener">Order on WhatsApp</a>
+              <button class="small-btn add-note" data-item="Fresh Lime Soda">Add Note</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <span class="eyebrow"><span class="dot"></span> Social proof</span>
+        <h2 style="margin-top:16px">Real reviews, not generic claims.</h2>
+        <div class="grid-3" style="margin-top:26px">
+          <div class="card review">
+            <div class="stars">★★★★★</div>
+            <p>“Great food and fast response on WhatsApp. Much easier than using apps.”</p>
+            <div class="reviewer"><div class="avatar"></div><div><strong>Customer A</strong><div class="muted">Regular diner</div></div></div>
+          </div>
+          <div class="card review">
+            <div class="stars">★★★★★</div>
+            <p>“The packaging was good and ordering directly saved time.”</p>
+            <div class="reviewer"><div class="avatar"></div><div><strong>Customer B</strong><div class="muted">Office lunch buyer</div></div></div>
+          </div>
+          <div class="card review">
+            <div class="stars">★★★★★</div>
+            <p>“Easy menu, quick pickup, and the chef special was excellent.”</p>
+            <div class="reviewer"><div class="avatar"></div><div><strong>Customer C</strong><div class="muted">Weekend customer</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <span class="eyebrow"><span class="dot"></span> FAQ</span>
+        <h2 style="margin-top:16px">Questions customers ask before they order.</h2>
+
+        <div style="margin-top:22px">
+          <details open>
+            <summary>How do I place an order?</summary>
+            <p class="muted" style="margin-top:10px">Tap any WhatsApp button and send your order directly. You can also call the kitchen.</p>
+          </details>
+          <details>
+            <summary>Do you take custom orders?</summary>
+            <p class="muted" style="margin-top:10px">Yes. Add your special requests in the WhatsApp message when you order.</p>
+          </details>
+          <details>
+            <summary>What areas do you deliver to?</summary>
+            <p class="muted" style="margin-top:10px">List serviceable areas clearly here. Keep it short and local.</p>
+          </details>
+          <details>
+            <summary>Can I see your full menu?</summary>
+            <p class="muted" style="margin-top:10px">Yes. Put the most popular dishes first and link to a full menu PDF if needed.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="margin-bottom:12px;">
+            <div class="brand-badge">K</div>
+            <div>
+              <div>Kitchen Name</div>
+              <div style="font-size:.86rem;">Cloud Kitchen • Direct Ordering</div>
+            </div>
+          </div>
+          <p class="muted">Replace placeholders with the restaurant’s real brand, menu, phone number, and photos.</p>
+        </div>
+        <div>
+          <strong>Quick Links</strong>
+          <div style="margin-top:10px; display:grid; gap:8px;">
+            <a href="#menu">Menu</a>
+            <a href="#reviews">Reviews</a>
+          </div>
+        </div>
+        <div>
+          <strong>Contact</strong>
+          <div style="margin-top:10px; display:grid; gap:8px;">
+            <a href="tel:+918454921895">+91 99999 99999</a>
+            <a href="mailto:hello@kitchenname.com">hello@kitchenname.com</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:24px; color:rgba(245,247,255,.55); font-size:.92rem;">
+        © 2026 Kitchen Name. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <a class="sticky-whatsapp track-click" data-item="Sticky CTA"
+     href="https://wa.me/918454921895?text=Hi%20I%20want%20to%20order%20from%20Kitchen%20Name" target="_blank" rel="noopener">
+    WhatsApp Order
+  </a>
+
+  
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    menuToggle?.addEventListener('click', () => mobileNav.classList.toggle('open'));
+
+    // Menu filtering
+    const filterButtons = document.querySelectorAll('.pill');
+    const items = document.querySelectorAll('.menu-item');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        items.forEach(item => {
+          const show = filter === 'all' || item.dataset.category === filter;
+          item.style.display = show ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // Track clicks to Google Analytics
+    function trackEvent(action, label) {
+      if (typeof gtag === 'function') {
+        gtag('event', action, {
+          event_category: 'engagement',
+          event_label: label
+        });
+      }
+    }
+
+    document.querySelectorAll('.track-click').forEach(el => {
+      el.addEventListener('click', () => {
+        trackEvent('whatsapp_click', el.dataset.item || 'unknown');
+      });
+    });
+
+    // "Add Note" button opens prefilled WhatsApp with notes prompt
+    document.querySelectorAll('.add-note').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.dataset.item || 'item';
+        const url = `https://wa.me/918454921895?text=Hi%20I%20want%20to%20order%20${encodeURIComponent(item)}%20with%20some%20customization`;
+        trackEvent('add_note_click', item);
+        window.open(url, '_blank', 'noopener');
+      });
+    });
+  </script>
+
+</body>
+</html>
