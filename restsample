@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Name</title>
+
+<!-- Google Analytics Placeholder -->
+<!-- Replace G-XXXXXXX with actual ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXX');
+</script>
+
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+background: #fafafa;
+}
+
+```
+header {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+section {
+  padding: 20px;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+button {
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.sticky-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 15px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+```
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Restaurant Name</h1>
+<p>Best Biryani in Bandra</p>
+</header>
+
+<section>
+<h2>Order Now</h2>
+<a href="[https://wa.me/919999999999?text=Hi I want to order](https://wa.me/919999999999?text=Hi%20I%20want%20to%20order)" onclick="trackClick('order_main')">
+<button>Order on WhatsApp</button>
+</a>
+</section>
+
+<section>
+<h2>Menu</h2>
+
+<div class="menu-item">
+<span>Chicken Biryani - ₹250</span>
+<a href="[https://wa.me/919999999999?text=Hi I want Chicken Biryani](https://wa.me/919999999999?text=Hi%20I%20want%20Chicken%20Biryani)" onclick="trackClick('biryani')">
+<button>Order</button>
+</a>
+</div>
+
+<div class="menu-item">
+<span>Paneer Roll - ₹120</span>
+<a href="[https://wa.me/919999999999?text=Hi I want Paneer Roll](https://wa.me/919999999999?text=Hi%20I%20want%20Paneer%20Roll)" onclick="trackClick('paneer')">
+<button>Order</button>
+</a>
+</div>
+
+</section>
+
+<section class="gallery">
+<h2>Gallery</h2>
+<img src="https://via.placeholder.com/400x250" alt="Food">
+<img src="https://via.placeholder.com/400x250" alt="Food">
+</section>
+
+<section>
+<h2>Reviews</h2>
+<p>⭐ 4.5 - "Best biryani in Bandra!"</p>
+<p>⭐ 4.3 - "Quick delivery and amazing taste."</p>
+</section>
+
+<section>
+<h2>Location</h2>
+<p>Bandra, Mumbai</p>
+<iframe
+src="https://maps.google.com/maps?q=bandra&t=&z=13&ie=UTF8&iwloc=&output=embed"
+width="100%" height="200">
+</iframe>
+</section>
+
+<section>
+<h2>Why Order Direct?</h2>
+<ul>
+<li>Better pricing than apps</li>
+<li>Faster service</li>
+<li>Custom orders available</li>
+</ul>
+</section>
+
+<!-- Sticky WhatsApp Button -->
+<a href="[https://wa.me/919999999999?text=Hi I want to order](https://wa.me/919999999999?text=Hi%20I%20want%20to%20order)"
+class="sticky-btn"
+onclick="trackClick('sticky_button')">
+Order Now
+</a>
+
+<script>
+function trackClick(item) {
+gtag('event', 'click', {
+'event_category': 'WhatsApp',
+'event_label': item
+});
+}
+</script>
+
+</body>
+</html>
